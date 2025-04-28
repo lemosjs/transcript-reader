@@ -1,0 +1,144 @@
+body {
+    font-family: Arial, sans-serif;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.stats {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+.stat-box {
+    background-color: #f0f0f0;
+    padding: 15px;
+    border-radius: 5px;
+    flex: 1;
+}
+.document-container {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+.tag-list {
+    margin-top: 10px;
+}
+.tag-item {
+    background-color: #e9f7fe;
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 3px;
+    display: inline-block;
+}
+.buttons {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+button {
+    padding: 10px 20px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+.approve-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+.reject-btn {
+    background-color: #f44336;
+    color: white;
+}
+.nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+.hidden {
+    display: none;
+}
+.transcription {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-top: 20px;
+    background-color: #fafafa;
+    max-height: 400px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    font-family: monospace;
+    font-size: 14px;
+    line-height: 1.5;
+}
+.highlight-money {
+    background-color: #FFEB3B;
+    padding: 0 2px;
+    border-radius: 2px;
+    font-weight: bold;
+}
+.highlight-keyphrase {
+    background-color: #FFCDD2;
+    padding: 0 2px;
+    border-radius: 2px;
+    font-weight: bold;
+}
+.upload-container {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    border: 1px dashed #ccc;
+}
+.file-input {
+    margin-bottom: 10px;
+}
+.upload-btn {
+    background-color: #007bff;
+    color: white;
+}
+.loading {
+    display: none;
+    margin-top: 10px;
+    font-style: italic;
+    color: #666;
+}
+.upload-options {
+    margin-bottom: 10px;
+}
+.select-mode {
+    margin-left: 10px;
+}
+.upload-mode-container {
+    margin-bottom: 10px;
+}
+.sample-info {
+    margin-bottom: 20px;
+}
+.error-message {
+    background-color: #ffecec;
+    color: #d8000c;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 20px 0;
+    border-left: 5px solid #d8000c;
+}
+/* Browser compatibility notice */
+.browser-notice {
+    background-color: #fff3cd;
+    color: #856404;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    display: none;
+}
+
+/* Error container */
+.error-container {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+    color: #721c24;
+} 

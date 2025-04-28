@@ -1,0 +1,29 @@
+[
+  {
+    "_id": {
+      "$oid": "60d0fe4f5311236168a109ca"
+    },
+    "website_name": "healthinsurance.org",
+    "phoneNumber": "555-123-4567",
+    "timeEst": "5min",
+    "transcription": "Hello, thank you for calling health insurance services. My name is John. I understand you're looking for a health insurance plan that meets your needs. Our bronze plan costs $250 per month with a $5,000 deductible. The silver plan is $350 per month with a $2,500 deductible. And our premium gold plan is $450 per month with only a $1,000 deductible. All plans cover preventive care at 100%. Which plan might be best for your household income and healthcare needs?"
+  },
+  {
+    "_id": {
+      "$oid": "60d0fe4f5311236168a109cb"
+    },
+    "website_name": "medicareadvantage.com",
+    "phoneNumber": "555-987-6543",
+    "timeEst": "8min",
+    "transcription": "Thank you for calling Medicare Advantage. I'm Sarah. Starting next month, we have a new Medicare Advantage plan that includes dental and vision coverage for only $75 per month above your standard Medicare premium. This plan has a maximum out-of-pocket limit of $4,200 per year, and the co-pay for primary care visits is just $10. Would you like to hear more about this plan's coverage for prescription medications?"
+  },
+  {
+    "_id": {
+      "$oid": "60d0fe4f5311236168a109cc"
+    },
+    "website_name": "affordablecare.net",
+    "phoneNumber": "555-789-0123",
+    "timeEst": "6min",
+    "transcription": "Hi there, this is Mike from Affordable Care Options. Based on the information you've provided about your annual income of $45,000, you may qualify for a subsidy that would reduce your monthly premium from $300 to approximately $175 per month. This plan includes comprehensive coverage with a $3,000 deductible and coverage for preventive services with no co-pay. Would that fit within your budget?"
+  }
+] 

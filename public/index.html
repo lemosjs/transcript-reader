@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transcription Reader</title>
+    <!-- Tailwind CSS -->
+    <link href="./assets/css/tailwind.min.css" rel="stylesheet">
+    <link href="./assets/css/style.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal p-8">
+    <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">Transcription Reader</h1>
+
+    <!-- Browser compatibility notice -->
+    <div id="browser-notice" class="browser-notice bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded relative mb-6" role="alert">
+        <strong class="font-bold">Browser Compatibility:</strong>
+        <span class="block sm:inline"> Your browser may not fully support all features. For best results, use the latest version of Chrome, Firefox, Safari, or Edge.</span>
+    </div>
+
+    <!-- Error container (hidden by default) -->
+    <div id="error-container" class="error-container bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-6" style="display: none;">
+        <h3 class="font-bold">Error</h3>
+        <p id="error-message">An error occurred.</p>
+    </div>
+
+    <div class="upload-container bg-white p-6 rounded-lg shadow-md mb-8 max-w-2xl mx-auto">
+        <h2 class="text-2xl font-semibold mb-4 text-gray-700">Upload Transcription File</h2>
+
+        <div class="sample-info mb-4 p-3 bg-blue-50 border border-blue-200 rounded">
+            <p class="text-sm text-blue-700">Need a sample file? You can <a href="sample.json" download class="font-medium text-blue-600 hover:text-blue-800 underline">download our sample.json</a> file to test the application.</p>
+        </div>
+
+        <div class="upload-options mb-4 flex items-center space-x-4">
+            <label for="upload-mode" class="font-medium text-gray-700">Upload Mode:</label>
+            <select id="upload-mode" class="select-mode block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                <option value="single">Single File</option>
+                <option value="compare">Compare Files</option>
+            </select>
+        </div>
+
+        <div id="single-upload" class="upload-mode-container mb-4">
+            <div class="file-input space-y-2">
+                <label class="block text-sm font-medium text-gray-700">Transcription File:</label>
+                <input type="file" id="transcript-file" accept=".json" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
+            </div>
+        </div>
+
+        <div id="compare-upload" class="upload-mode-container mb-4" style="display: none;">
+            <div class="file-input space-y-2 mb-3">
+                <label class="block text-sm font-medium text-gray-700">New Transcriptions:</label>
+                <input type="file" id="new-file" accept=".json" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100">
+            </div>
+            <div class="file-input space-y-2">
+                <label class="block text-sm font-medium text-gray-700">Old Transcriptions (to compare against):</label>
+                <input type="file" id="old-file" accept=".json" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-red-50 file:text-red-700 hover:file:bg-red-100">
+            </div>
+        </div>
+
+        <button id="upload-btn" class="upload-btn w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-150 ease-in-out">Process Transcription</button>
+        <div id="loading" class="loading mt-4 text-center text-gray-600" style="display: none;">Processing transcriptions, please wait...</div>
+    </div>
+
+    <div class="stats grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8 max-w-4xl mx-auto">
+        <div class="stat-box bg-white p-4 rounded-lg shadow text-center">
+            <h3 class="text-sm font-medium text-gray-500 uppercase">Total Documents</h3>
+            <p id="total-count" class="mt-1 text-3xl font-semibold text-gray-900">0</p>
+        </div>
+        <div class="stat-box bg-white p-4 rounded-lg shadow text-center">
+            <h3 class="text-sm font-medium text-gray-500 uppercase">Approved</h3>
+            <p id="approved-count" class="mt-1 text-3xl font-semibold text-green-600">0</p>
+        </div>
+        <div class="stat-box bg-white p-4 rounded-lg shadow text-center">
+            <h3 class="text-sm font-medium text-gray-500 uppercase">Rejected</h3>
+            <p id="rejected-count" class="mt-1 text-3xl font-semibold text-red-600">0</p>
+        </div>
+        <div class="stat-box bg-white p-4 rounded-lg shadow text-center">
+            <h3 class="text-sm font-medium text-gray-500 uppercase">Pending</h3>
+            <p id="pending-count" class="mt-1 text-3xl font-semibold text-yellow-600">0</p>
+        </div>
+    </div>
+
+    <div id="document-display" class="document-container bg-white p-6 rounded-lg shadow-md mb-8 max-w-4xl mx-auto">
+        <h2 class="text-xl font-semibold mb-4 text-gray-700">Document: <span id="current-index">1</span>/<span id="total-docs">0</span></h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 text-sm">
+            <p><strong>ID:</strong> <span id="doc-id" class="text-gray-600">N/A</span></p>
+            <p><strong>Website:</strong> <span id="website" class="text-gray-600">N/A</span></p>
+            <p><strong>Phone:</strong> <span id="phone" class="text-gray-600">N/A</span></p>
+            <p><strong>Time Estimate:</strong> <span id="time-est" class="text-gray-600">N/A</span></p>
+        </div>
+
+        <h3 class="text-lg font-semibold mb-2 text-gray-700">Transcription:</h3>
+        <div id="transcription" class="transcription bg-gray-50 p-4 rounded border border-gray-200 h-64 overflow-y-auto text-sm text-gray-800 mb-4">No transcription loaded yet</div>
+
+        <div class="buttons flex space-x-4 mb-6">
+            <button id="approve-btn" class="approve-btn flex-1 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-150 ease-in-out">Approve</button>
+            <button id="reject-btn" class="reject-btn flex-1 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-150 ease-in-out">Reject</button>
+        </div>
+    </div>
+
+    <div class="nav-buttons flex justify-center space-x-4 max-w-4xl mx-auto">
+        <button id="prev-btn" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-150 ease-in-out">Previous</button>
+        <button id="next-btn" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-150 ease-in-out">Next</button>
+        <button id="save-decisions-btn" class="upload-btn bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-150 ease-in-out">Save Decisions</button>
+    </div>
+
+    <script src="./assets/javascript/index.js" type="module"></script>
+</body>
+</html> 
